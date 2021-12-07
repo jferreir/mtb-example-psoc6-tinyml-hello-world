@@ -1,0 +1,2 @@
+tflm-cmsis/examples
+tflm-cmsis/tensorflow/lite/micro/cortex_m_generic/debug_log.cpp
