@@ -8,7 +8,7 @@ microcontroller.
 
 - Code from https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world
 - The folder tflm-cmsis was generated following the steps at https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md#step-5-integrating-optimized-kernel-implementations
-- Additionally in the Makefile, CMSIS_NN needs to be defined.
+- Additionally in the Makefile, **CMSIS_NN** needs to be defined.
 - Finally ModusToolbox only considers .cpp as C++ source code
 - Run the following in the base folder
   ```
