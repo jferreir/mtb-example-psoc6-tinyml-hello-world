@@ -40,7 +40,7 @@ TARGET=CY8CPROTO-062-4343W
 #
 # If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
-APPNAME=mtb-example-psoc6-hello-world
+APPNAME=mtb-example-psoc6-tinyml-hello-world
 
 # Name of toolchain to use. Options include:
 #
@@ -92,10 +92,10 @@ SOURCES=
 
 # Like SOURCES, but for include directories. Value should be paths to
 # directories (without a leading -I).
-INCLUDES=
+INCLUDES=tflm-cmsis/third_party/flatbuffers/include
 
 # Add additional defines to the build process (without a leading -D).
-DEFINES=CMSIS_NN
+DEFINES=TF_LITE_STATIC_MEMORY TF_LITE_DISABLE_X86_NEON CMSIS_NN TF_LITE_MCU_DEBUG_LOG CPU_M4=1 __FPU_PRESENT=1 
 
 # Select softfp or hardfp floating point. Default is softfp.
 VFP_SELECT=
@@ -104,13 +104,13 @@ VFP_SELECT=
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CFLAGS=
+CFLAGS=-std=c11
 
 # Additional / custom C++ compiler flags.
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CXXFLAGS=
+CXXFLAGS=-std=c++11
 
 # Additional / custom assembler flags.
 #
