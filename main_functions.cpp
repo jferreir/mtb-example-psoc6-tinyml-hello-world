@@ -15,7 +15,7 @@ limitations under the License.
 
 #include "main_functions.h"
 
-#include "tensorflow/lite/micro/all_ops_resolver.h"
+#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "constants.h"
 #include "hello_world_model_data.h"
 #include "output_handler.h"
@@ -23,9 +23,11 @@ limitations under the License.
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/system_setup.h"
 #include "tensorflow/lite/schema/schema_generated.h"
+#include "tensorflow/lite/micro/cortex_m_generic/debug_log_callback.h"
 
 extern "C" {
-#include <cmath>
+#include <math.h>
+#include <stdio.h>
 #include "cy_pdl.h"
 #include "cyhal.h"
 #include "cybsp.h"
@@ -45,9 +47,16 @@ constexpr int kTensorArenaSize = 2000;
 uint8_t tensor_arena[kTensorArenaSize];
 }  // namespace
 
+void debug_log_printf(const char* s)
+{
+    printf(s);
+}
+
 // The name of this function is important for Arduino compatibility.
 void setup() {
   tflite::InitializeTarget();
+
+  RegisterDebugLogCallback(debug_log_printf);
 
   // Set up logging. Google style is to avoid globals or statics because of
   // lifetime uncertainty, but since this has a trivial destructor it's okay.
@@ -68,11 +77,15 @@ void setup() {
 
   // This pulls in all the operation implementations we need.
   // NOLINTNEXTLINE(runtime-global-variables)
-  static tflite::AllOpsResolver resolver;
+  tflite::MicroMutableOpResolver<4> micro_op_resolver;
+  micro_op_resolver.AddQuantize();
+  micro_op_resolver.AddFullyConnected();
+  micro_op_resolver.AddRelu();
+  micro_op_resolver.AddDequantize();
 
   // Build an interpreter to run the model with.
   static tflite::MicroInterpreter static_interpreter(
-      model, resolver, tensor_arena, kTensorArenaSize, error_reporter);
+      model, micro_op_resolver, tensor_arena, kTensorArenaSize, error_reporter);
   interpreter = &static_interpreter;
 
   // Allocate memory from the tensor_arena for the model's tensors.
