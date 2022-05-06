@@ -1,2 +1,1 @@
-tflm-cmsis/examples
-tflm-cmsis/tensorflow/lite/micro/cortex_m_generic/debug_log.cpp
+tflm-cmsis/third_party/flatbuffers/include/flatbuffers
