@@ -98,7 +98,7 @@ INCLUDES=tflm-cmsis/third_party/flatbuffers/include
 DEFINES=TF_LITE_STATIC_MEMORY TF_LITE_DISABLE_X86_NEON CMSIS_NN TF_LITE_MCU_DEBUG_LOG CPU_M4=1 __FPU_PRESENT=1 
 
 # Select softfp or hardfp floating point. Default is softfp.
-VFP_SELECT=
+VFP_SELECT=hardfp
 
 # Additional / custom C compiler flags.
 #
