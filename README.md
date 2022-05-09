@@ -6,12 +6,16 @@ It includes the full end-to-end workflow of training a model, converting it for
 use with TensorFlow Lite for Microcontrollers for running inference on a
 microcontroller.
 
-- Code from https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world
+## Train the model
+This example shows how to train a 2.5 kB model to generate a sine wave (https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb)
+
+## Run the tests on a development machine
+
 - The folder tflm-cmsis was generated following the steps at https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md#step-5-integrating-optimized-kernel-implementations
   ```
   $ python3 tensorflow/lite/micro/tools/project_generation/create_tflm_tree.py --makefile_options="TARGET=cortex_m_generic OPTIMIZED_KERNEL_DIR=cmsis_nn TARGET_ARCH=project_generation" --rename_cc_to_cpp /tmp/tflm-cmsis
   ```
-- Additionally in the Makefile, **CMSIS_NN** needs to be defined.
+- Example code from https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world
 
 ## Software Setup
 
